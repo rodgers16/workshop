@@ -9,7 +9,6 @@ export interface CardGridProps {
 
 export function CardGrid({ memoryCards }: CardGridProps) {
   const [cards, setCards] = useState(memoryCards);
-  const [matches, setMatches] = useState([]);
   const [score, setScore] = useState(0);
 
   function handleClick(card: MemoryCard) {
@@ -27,6 +26,7 @@ export function CardGrid({ memoryCards }: CardGridProps) {
     const typesFlipped = cards
       .filter((card) => card.flipped)
       .map(({ type }) => type);
+
     const nonMatches = typesFlipped.filter(
       (type) => typesFlipped.indexOf(type) == typesFlipped.lastIndexOf(type)
     );
