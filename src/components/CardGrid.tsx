@@ -9,7 +9,7 @@ export interface CardGridProps {
 
 export function CardGrid({ memoryCards }: CardGridProps) {
   const [cards, setCards] = useState(memoryCards);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState('0');
 
   function handleClick(card: MemoryCard) {
     const selectedCard = cards.find(
@@ -44,7 +44,11 @@ export function CardGrid({ memoryCards }: CardGridProps) {
       }, 1000);
     }
     const score = typesFlipped.length - new Set(typesFlipped).size;
-    setScore(score);
+    if (score === cards.length / 2) {
+      setScore("Congrats You've Won!");
+    } else {
+      setScore(score.toString());
+    }
   }, [cards]);
 
   return (
@@ -61,7 +65,10 @@ export function CardGrid({ memoryCards }: CardGridProps) {
           );
         })}
       </div>
-      <h1>Score: {score}</h1>
+      <h1>
+        {score.length < 2 && 'Score:'}
+        {score}
+      </h1>
     </>
   );
 }
